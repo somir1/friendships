@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Friendships</h1>
+    <h2>Users and their friends</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Friend</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users: %}
+            <tr>
+                <td>{{user.first_name}}</td>
+                <td>{{user.friend_first_name}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+
+    <h2>All users</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in mains: %}
+            <tr>
+                <td>{{user.first_name}}</td>
+                <td>{{user.last_name}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <h1>Add User</h1>
+    <form action="/adduser", method = "post">
+        First Name:
+        <input type="text" name="first_name"><br>
+        <br>
+        Last Name:
+        <input type="text" name="last_name"><br>
+        <br>
+        <input type="submit" value="Create User">
+    </form>
+
+    <form action="/newfriend",  method = "post">
+        User:
+        <select name="users_id">
+            {% for user in mains: %}
+            <option value="{{user.id}}">{{user.first_name}}</option>
+            {%endfor%}
+        </select>
+        <br>
+        Friend:
+        <select name="friend_id">
+            {% for user in mains: %}
+            <option value="{{user.id}}">{{user.first_name}}</option>
+            {%endfor%}
+        </select>
+        <input type="submit" value="Create friends">
+    </form>
+</body>
+</html>
